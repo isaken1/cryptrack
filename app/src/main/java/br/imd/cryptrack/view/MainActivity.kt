@@ -20,6 +20,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private var navigator: BottomNavigationView? = null
+    private var fullListFragment: FullListFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,15 +41,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 response: Response<CryptoCompareCoinListResponse>
             ) {
                 response.body()?.let {
-                    this@MainActivity.txtTeste.setText(it.message)
+//                    this@MainActivity.txtTeste.setText(it.message)
                 }
             }
 
             override fun onFailure(call: Call<CryptoCompareCoinListResponse>, t: Throwable) {
                 Log.e("ERROR", "Erro ao acessar a API", t)
-                this@MainActivity.txtTeste.setText(t.message)
+//                this@MainActivity.txtTeste.setText(t.message)
             }
         })
+
+        fullListFragment = FullListFragment()
     }
 
     /**
@@ -58,8 +61,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_list_all -> {
-                navigateTo(FullListFragment())
+                if (fullListFragment == null) {
+                    fullListFragment = FullListFragment()
+                }
+                navigateTo(fullListFragment as Fragment)
             }
+
             //TODO: Quando feitos os outros fragments, adicionar a transição deles aqui
             else -> {
                 Toast.makeText(this, "Funcionalidade ainda não implementada!",

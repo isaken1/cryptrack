@@ -10,11 +10,13 @@
         android:id="@+id/nav_list_favs"
         android:icon="@drawable/ic_favorite"
         android:title="Favoritas"
+        android:enabled="false"
         />
 
     <item
         android:id="@+id/nav_wallet"
         android:icon="@drawable/ic_wallet"
         android:title="Carteira"
+        android:enabled="false"
         />
 </menu>
