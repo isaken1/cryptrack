@@ -1,11 +1,9 @@
 package br.imd.cryptrack.model
 
-import com.google.gson.annotations.SerializedName
-
 data class Coin (
-    @SerializedName("Id") private val id: Long,
-    @SerializedName("Url") private val url: String,
-    @SerializedName("ImageUrl") private val imageUrl: String,
-    @SerializedName("CoinName") private val name: String,
-    @SerializedName("Symbol") private val symbol: String
+    private val id: Long,
+    private val url: String,
+    private val imageUrl: String?,
+    private val name: String,
+    private val symbol: String
 )

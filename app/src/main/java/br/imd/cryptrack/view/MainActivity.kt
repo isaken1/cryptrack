@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val call = RetrofitInitializer().cryptoCompareService().getAllCoins()
 
         call.enqueue(object: Callback<CryptoCompareCoinListResponse> {
+
             override fun onResponse(
                 call: Call<CryptoCompareCoinListResponse>,
                 response: Response<CryptoCompareCoinListResponse>
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
             override fun onFailure(call: Call<CryptoCompareCoinListResponse>, t: Throwable) {
                 Log.e("ERROR", "Erro ao acessar a API", t)
+                this@MainActivity.txtTeste.setText(t.message)
             }
         })
     }
