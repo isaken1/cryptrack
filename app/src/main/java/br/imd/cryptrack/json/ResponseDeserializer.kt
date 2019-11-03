@@ -39,9 +39,7 @@ class ResponseDeserializer: JsonDeserializer<CryptoCompareCoinListResponse> {
                 val name = coinJson.get("CoinName").asString
                 val symbol = coinJson.get("Symbol").asString
 
-                val coin = Coin(coinId, coinUrl, imageUrl, name, symbol)
-
-                coinList.add(coin)
+                coinList.add(Coin(coinId, coinUrl, imageUrl, name, symbol))
             }
         }
 
