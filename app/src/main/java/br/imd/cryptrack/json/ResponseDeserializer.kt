@@ -43,9 +43,11 @@ class ResponseDeserializer: JsonDeserializer<CryptoCompareCoinListResponse> {
             }
         }
 
-        return CryptoCompareCoinListResponse(response = response,
+        return CryptoCompareCoinListResponse(
+            response = response,
             message = message,
             type = type,
-            data = coinList)
+            data = coinList
+        )
     }
 }

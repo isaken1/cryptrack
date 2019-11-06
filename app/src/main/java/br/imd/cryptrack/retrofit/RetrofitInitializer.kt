@@ -2,7 +2,7 @@ package br.imd.cryptrack.retrofit
 
 import br.imd.cryptrack.json.ResponseDeserializer
 import br.imd.cryptrack.model.CryptoCompareCoinListResponse
-import br.imd.cryptrack.service.CryptoCompareService
+import br.imd.cryptrack.retrofit.service.CryptoCompareService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

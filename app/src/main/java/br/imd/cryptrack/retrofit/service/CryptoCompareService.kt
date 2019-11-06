@@ -1,4 +1,4 @@
-package br.imd.cryptrack.service
+package br.imd.cryptrack.retrofit.service
 
 import br.imd.cryptrack.model.CryptoCompareCoinListResponse
 import retrofit2.Call
