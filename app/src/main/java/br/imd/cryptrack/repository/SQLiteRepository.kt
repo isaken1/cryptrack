@@ -3,6 +3,7 @@ package br.imd.cryptrack.repository
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import androidx.core.database.getDoubleOrNull
 import br.imd.cryptrack.model.Coin
 
 class SQLiteRepository(context: Context): CrypTrackRepository {
@@ -12,14 +13,19 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
         val db = helper.writableDatabase
 
         val cv = ContentValues().apply {
+            put(COLUMN_ID, coin.id)
             put(COLUMN_NAME, coin.name)
-            put(COLUMN_PATH, coin.imageUrl)
+            put(COLUMN_SYMBOL, coin.symbol)
+            put(COLUMN_URL, coin.url)
+            put(COLUMN_IMG_URL, coin.imageUrl)
+            put(COLUMN_OPEN, coin.openPrice)
+            put(COLUMN_CLOSE, coin.closePrice)
+            put(COLUMN_HIGH, coin.highPrice)
+            put(COLUMN_LOW, coin.lowPrice)
+            put(COLUMN_VOLUME, coin.volume)
         }
 
-        val id = db.insert(TABLE_NAME, null, cv)
-        if(id != -1L){
-            coin.id = id
-        }
+        db.insert(TABLE_NAME, null, cv)
         db.close()
     }
 
@@ -28,8 +34,16 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
 
         val cv = ContentValues().apply{
             put(COLUMN_NAME, coin.name)
-            put(COLUMN_PATH, coin.imageUrl)
+            put(COLUMN_SYMBOL, coin.symbol)
+            put(COLUMN_URL, coin.url)
+            put(COLUMN_IMG_URL, coin.imageUrl)
+            put(COLUMN_OPEN, coin.openPrice)
+            put(COLUMN_CLOSE, coin.closePrice)
+            put(COLUMN_HIGH, coin.highPrice)
+            put(COLUMN_LOW, coin.lowPrice)
+            put(COLUMN_VOLUME, coin.volume)
         }
+
         db.update(
             TABLE_NAME,
             cv,
@@ -43,7 +57,7 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
     override fun save(coin: Coin) {
         if(coin.id == 0L){
             insert(coin)
-        }else{
+        } else {
             update(coin)
         }
     }
@@ -83,9 +97,18 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
 
     private fun coinFromCursor(cursor: Cursor): Coin{
         val id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID))
+        val url = cursor.getString(cursor.getColumnIndex(COLUMN_URL))
+        val imageUrl = cursor.getString(cursor.getColumnIndex(COLUMN_IMG_URL))
         val name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
-        val path = cursor.getString(cursor.getColumnIndex(COLUMN_PATH))
+        val symbol = cursor.getString(cursor.getColumnIndex(COLUMN_SYMBOL))
+        val openPrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_OPEN))
+        val closePrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_CLOSE))
+        val highPrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_HIGH))
+        val lowPrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_LOW))
+        val volume = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_VOLUME))
 
-        return Coin(id, name, path)
+
+        return Coin(id, url, imageUrl, name, symbol, openPrice, closePrice, highPrice,
+            lowPrice, volume)
     }
 }
