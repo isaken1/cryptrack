@@ -108,7 +108,7 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
         val volume = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_VOLUME))
 
 
-        return Coin(id, url, imageUrl, name, symbol, openPrice, closePrice, highPrice,
+        return Coin(id, url, imageUrl, name, null, openPrice, symbol, closePrice, highPrice,
             lowPrice, volume)
     }
 }
