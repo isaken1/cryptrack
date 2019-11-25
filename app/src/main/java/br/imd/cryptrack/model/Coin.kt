@@ -5,5 +5,6 @@ data class Coin (
     var url: String,
     var imageUrl: String?,
     var name: String,
-    var symbol: String
+    var symbol: String,
+    var imagePath: String
 )
