@@ -5,9 +5,9 @@ data class Coin (
     var url: String,
     var imageUrl: String?,
     var name: String,
-    var imagePath: String
-    var symbol: String,
+    var imagePath: String?,
     var openPrice: Double?,
+    var symbol: String,
     var closePrice: Double?,
     var lowPrice: Double?,
     var highPrice: Double?,
