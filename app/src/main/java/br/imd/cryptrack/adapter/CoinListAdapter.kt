@@ -32,7 +32,8 @@ class CoinListAdapter(
     override fun getItemCount(): Int = coins.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val (_, _, _, name, symbol) = coins[position]
+        val (_, _, _, name, _, _, symbol)
+                = coins[position]
 
         holder.txtName.setText(name)
         holder.txtSymbol.setText(symbol)
