@@ -55,11 +55,17 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
     }
 
     override fun save(coin: Coin) {
-        if(coin.id == 0L){
+        val db = helper.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = ? ",
+            arrayOf(coin.id.toString()))
+
+        if(cursor.count <= 0){
             insert(coin)
         } else {
             update(coin)
         }
+        cursor.close()
+        db.close()
     }
 
     override fun remove(coin: Coin) {
@@ -93,6 +99,29 @@ class SQLiteRepository(context: Context): CrypTrackRepository {
         db.close()
 
         callback(coins)
+    }
+
+    override fun coinById(id: Long): Coin {
+        val db = helper.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = ?",
+            arrayOf(id.toString()))
+
+        val id = cursor.getLong(cursor.getColumnIndex(COLUMN_ID))
+        val url = cursor.getString(cursor.getColumnIndex(COLUMN_URL))
+        val imageUrl = cursor.getString(cursor.getColumnIndex(COLUMN_IMG_URL))
+        val name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
+        val symbol = cursor.getString(cursor.getColumnIndex(COLUMN_SYMBOL))
+        val openPrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_OPEN))
+        val closePrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_CLOSE))
+        val highPrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_HIGH))
+        val lowPrice = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_LOW))
+        val volume = cursor.getDoubleOrNull(cursor.getColumnIndex(COLUMN_VOLUME))
+
+        db.close()
+        cursor.close()
+
+        return Coin(id, url, imageUrl, name, null, openPrice, symbol, closePrice, highPrice,
+            lowPrice, volume)
     }
 
     private fun coinFromCursor(cursor: Cursor): Coin{

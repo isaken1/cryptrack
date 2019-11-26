@@ -38,4 +38,9 @@ class CoinListAdapter(
         holder.txtName.setText(name)
         holder.txtSymbol.setText(symbol)
     }
+
+    override fun getItemId(position: Int): Long = coins[position].id
+
+
+
 }

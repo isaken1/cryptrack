@@ -6,4 +6,5 @@ interface CrypTrackRepository {
     fun save(coin: Coin)
     fun remove(coin: Coin)
     fun list(callback:(MutableList<Coin>) -> Unit)
+    fun coinById(id: Long): Coin
 }

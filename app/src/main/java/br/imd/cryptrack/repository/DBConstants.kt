@@ -17,14 +17,14 @@ const val COLUMN_LOW = "low"
 /**
  * SQL de criação da tabela moeda na versão 1 do banco
  */
-const val SQL_CREATE_TABLE_COIN = "CREATE TABLE ${TABLE_NAME} " +
-        "(${COLUMN_ID} PRIMARY KEY, " +
-        "${COLUMN_NAME} TEXT NOT NULL, " +
-        "${COLUMN_IMG_URL} TEXT NULL, " +
-        "${COLUMN_URL} TEXT NULL, " +
-        "${COLUMN_SYMBOL} TEXT NOT NULL, " +
-        "${COLUMN_VOLUME} REAL NULL, " +
-        "${COLUMN_OPEN} REAL NULL, " +
-        "${COLUMN_CLOSE} REAL NULL, " +
-        "${COLUMN_HIGH} REAL NULL, " +
-        "${COLUMN_LOW} REAL NULL);"
+const val SQL_CREATE_TABLE_COIN = "CREATE TABLE $TABLE_NAME " +
+        "($COLUMN_ID INTEGER PRIMARY KEY, " +
+        "$COLUMN_NAME TEXT NOT NULL, " +
+        "$COLUMN_IMG_URL TEXT NULL, " +
+        "$COLUMN_URL TEXT NULL, " +
+        "$COLUMN_SYMBOL TEXT NOT NULL, " +
+        "$COLUMN_VOLUME REAL NULL, " +
+        "$COLUMN_OPEN REAL NULL, " +
+        "$COLUMN_CLOSE REAL NULL, " +
+        "$COLUMN_HIGH REAL NULL, " +
+        "$COLUMN_LOW REAL NULL);"

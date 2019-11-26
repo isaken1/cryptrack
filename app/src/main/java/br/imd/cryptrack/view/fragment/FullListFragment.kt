@@ -15,7 +15,7 @@ import br.imd.cryptrack.adapter.CoinListAdapter
 import kotlinx.android.synthetic.main.fragment_full_list.view.*
 
 class FullListFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
+    private var recyclerView: RecyclerView? = null
     private var searchView: SearchView? = null
     private lateinit var queryListener: SearchView.OnQueryTextListener
 
@@ -63,8 +63,8 @@ class FullListFragment : Fragment() {
     }
 
     fun initRecyclerView(adapter: CoinListAdapter) {
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView?.adapter = adapter
+        recyclerView?.layoutManager = LinearLayoutManager(this.context)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
