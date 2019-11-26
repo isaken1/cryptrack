@@ -7,12 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper
 class CrypTrackSqlHelper(context: Context):
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        db.execSQL(
-            "CREATE TABLE $TABLE_NAME(" +
-                    "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$COLUMN_NAME TEXT NOT NULL, " +
-                    "$COLUMN_PATH TEXT)")
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(SQL_CREATE_TABLE_COIN)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
